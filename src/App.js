@@ -10,7 +10,6 @@ import MovieDetail from './components/movieDetail/MovieDetail';
 function App() {
   return (
     <div className="App">
-       <h1>Movie Website !! </h1>
        <Router>
          <Header></Header>
          <Home></Home>
