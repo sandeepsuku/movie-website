@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import MovieListing from '../movieListing/MovieListing'
 
 export class Home extends Component {
   render() {
     return (
-      <div>Home</div>
+      <div style={{ background : '#0f171e' }}>
+         <MovieListing/>
+      </div>
     )
   }
 }
