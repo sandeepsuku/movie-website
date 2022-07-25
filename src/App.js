@@ -13,9 +13,8 @@ function App() {
        <Router>
          <Header></Header>
           <Routes>
-            <Route exact path="/" element ={<Home/>} />
-            <Route exact path='/movie-listing' element ={<MovieListing/>} />
-            <Route path='/movie/:imdbID' element ={<MovieDetail/>} />
+            <Route exact path="/movie-website/" element ={<Home/>} />
+            <Route path='/movie-website/movie/:imdbID' element ={<MovieDetail/>} />
           </Routes>
          <Footer></Footer>
        </Router>
