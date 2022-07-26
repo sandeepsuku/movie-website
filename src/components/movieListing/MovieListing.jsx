@@ -4,17 +4,20 @@ import MovieCard from '../movieCard/MovieCard'
 
 
 const MovieListing = (props) => {
-    return (
-     <div style={{ color: 'white'}}> 
-          <Grid container spacing={3} padding={5}>
-               {props.movies.map((movie, index) => 
-                    <Grid item lg={3}>
-                      <MovieCard imageName={movie.Poster} movieValue={movie.Title} movieYearValue={movie.Year} movieTypeValue={movie.Type}  movieId={movie.imdbID}></MovieCard>
-                    </Grid>
-               )}
-          </Grid>
-     </div>
-    )
+     if (props.movies && props.movies.length > 0) {
+          return (
+                    <div style={{ color: 'white'}}> 
+                         <Grid container spacing={3} padding={5}>
+                              {props.movies.map((movie, index) => 
+                                   <Grid item lg={3} key={index}>
+                                   <MovieCard imageName={movie.Poster} movieValue={movie.Title} movieYearValue={movie.Year} movieTypeValue={movie.Type}  movieId={movie.imdbID}></MovieCard>
+                                   </Grid>
+                              )}
+                         </Grid>
+                    </div>
+               
+          )
+     }
   }
 
 export default MovieListing
