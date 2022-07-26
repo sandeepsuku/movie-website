@@ -9,7 +9,7 @@ const MovieListing = (props) => {
           <Grid container spacing={3} padding={5}>
                {props.movies.map((movie, index) => 
                     <Grid item lg={3}>
-                      <MovieCard imageName={movie.Poster} movieValue={movie.Title} movieYearValue={movie.Year} movieTypeValue={movie.Type}></MovieCard>
+                      <MovieCard imageName={movie.Poster} movieValue={movie.Title} movieYearValue={movie.Year} movieTypeValue={movie.Type}  movieId={movie.imdbID}></MovieCard>
                     </Grid>
                )}
           </Grid>
