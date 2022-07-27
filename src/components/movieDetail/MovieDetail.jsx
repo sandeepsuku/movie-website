@@ -12,7 +12,7 @@ function MovieDetail () {
   
     },[])
     
-    const getMovieDetailObj= (props) => {
+    const getMovieDetailObj= () => {
       const movieApiurl = 'http://www.omdbapi.com';
       var params = new URLSearchParams();
       params.append("apikey", '18a01f17');
@@ -31,7 +31,6 @@ function MovieDetail () {
     }     
 
     return (<div className="movie-info">
-        <div className="background-black">
             <div class="row">
                 <div className="movie-info">
                     <img className="img" src={movieDetailObj.Poster} alt="" />
@@ -52,7 +51,6 @@ function MovieDetail () {
                     </div>
                 </div>
             </div>
-        </div>
     </div> );
 }
 
