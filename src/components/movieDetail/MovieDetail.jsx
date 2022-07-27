@@ -35,7 +35,7 @@ function MovieDetail () {
                 <div className="movie-info">
                     <img className="img" src={movieDetailObj.Poster} alt="" />
                         <div className="card-body">
-                            <h1 className="movie-info">{movieDetailObj.Title} {ImdbId()}</h1>
+                            <h1 className="movie-info">{movieDetailObj.Title}</h1>
                         </div>
                 </div>
                 <div className="movie-info">
