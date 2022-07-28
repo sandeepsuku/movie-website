@@ -13,7 +13,7 @@ function MovieDetail () {
     },[])
     
     const getMovieDetailObj= () => {
-      const movieApiurl = 'http://www.omdbapi.com';
+      const movieApiurl = 'https://www.omdbapi.com';
       var params = new URLSearchParams();
       params.append("apikey", '18a01f17');
       params.append("i",  id);
