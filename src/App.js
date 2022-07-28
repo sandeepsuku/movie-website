@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
-import MovieListing from './components/movieListing/MovieListing';
-import MovieCard from './components/movieCard/MovieCard';
 import MovieDetail from './components/movieDetail/MovieDetail';
 
 function App() {
