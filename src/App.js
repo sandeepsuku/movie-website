@@ -9,12 +9,12 @@ function App() {
   return (
     <div className="App">
        <Router>
-         <Header></Header>
+         <Header title={ 'Movie Catalog' }></Header>
           <Routes>
             <Route exact path="/movie-website/" element ={<Home/>} />
             <Route path='/movie-website/movie/:imdbID' element ={<MovieDetail/>} />
           </Routes>
-         <Footer></Footer>
+         <Footer ></Footer>
        </Router>
     </div>
   );
