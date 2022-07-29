@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
 import React, { Component, useState } from 'react'
 import MovieCard from '../movieCard/MovieCard'
+import '../movieListing/movieListing.scss'
 
 
 const MovieListing = (props) => {
@@ -16,6 +17,13 @@ const MovieListing = (props) => {
                          </Grid>
                     </div>
                
+          )
+     }
+     else {
+          return(
+               <div className='Nodatafound'>
+               <h1>No movies found</h1>
+               </div>
           )
      }
   }

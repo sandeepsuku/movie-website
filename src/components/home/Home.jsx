@@ -7,6 +7,7 @@ import './home.scss'
 
 function Home() {
    const[movies, setMovies] = useState([]);
+   const[originalmovielist, setOriginalmovies] = useState([]);
    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(()=> {
@@ -28,12 +29,13 @@ function Home() {
       .then(resp => {
          console.log("getAllMovies response list -> " + resp.data.Search);
          setMovies(resp.data.Search);
+         setOriginalmovies(resp.data.Search);
       })
       .catch(err => {
             console.error("Error " + err);
       })
     } 
-    const getMoviesbysearchTerm=() => {
+    const getMoviesbysearchTerm=(searchTerm) => {
       let filterlist=movies.filter((value)=>{
        return value.Title.toLowerCase().includes(searchTerm.toLowerCase())
       })
@@ -49,13 +51,23 @@ function Home() {
           <input 
           placeholder="Search for Movies"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+          if (e.target.value.trim().length===0){
+            console.log("movies",originalmovielist)
+            setMovies(originalmovielist)
+            
+                    }
+          else {
+            getMoviesbysearchTerm(e.target.value)
+          }
+          
+          setSearchTerm(e.target.value)
+          }}
         />
         <img 
           src={SerchIcon}
           alt="search"
-          onClick={() => getMoviesbysearchTerm()}
-         />
+        />
         </div>
          <MovieListing movies={movies} ></MovieListing>
        </div>
