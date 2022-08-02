@@ -9,7 +9,7 @@ function Header(props) {
     <Box>
         <AppBar position='static'>
           <Toolbar variant='dense' >
-          <Typography variant="h3" color="inherit" component="div" > 
+          <Typography variant="h3" color="inherit" component="div" data-testid="header-id"> 
             {props.title}
           </Typography>
           </Toolbar>
