@@ -20,7 +20,7 @@ function Home() {
       const movieApiurl = 'https://www.omdbapi.com';
       var params = new URLSearchParams();
       params.append("apikey", '18a01f17');
-      params.append("s",  'harry');
+      params.append("s",  'batman');
       params.append("page",  1);
   
       var request = { params: params };
@@ -69,7 +69,8 @@ function Home() {
           alt="search"
         />
         </div>
-         <MovieListing movies={movies} ></MovieListing>
+         <MovieListing movies={movies} sectiontitle={'Recommended Movies'} ></MovieListing>
+         <MovieListing movies={movies} sectiontitle={'In Theaters'} ></MovieListing>
        </div>
     </div>
   )

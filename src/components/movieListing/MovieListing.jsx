@@ -8,10 +8,11 @@ const MovieListing = (props) => {
      if (props.movies && props.movies.length > 0) {
           return (
                     <div style={{ color: 'white'}}> 
-                         <Grid container spacing={3} padding={5}>
+                         <h2> {props.sectiontitle}</h2>
+                         <Grid container spacing={3} padding={2}>
                               {props.movies.map((movie, index) => 
-                                   <Grid item lg={3} key={index}>
-                                   <MovieCard imageName={movie.Poster} movieValue={movie.Title} movieYearValue={movie.Year} movieTypeValue={movie.Type}  movieId={movie.imdbID}></MovieCard>
+                                   <Grid item lg={2} key={index}>
+                                        <MovieCard imageName={movie.Poster} movieValue={movie.Title} movieYearValue={movie.Year} movieTypeValue={movie.Type}  movieId={movie.imdbID}></MovieCard>
                                    </Grid>
                               )}
                          </Grid>
