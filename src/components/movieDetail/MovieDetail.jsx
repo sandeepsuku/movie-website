@@ -1,32 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './movieDetail.scss';
 import {useParams} from "react-router-dom";
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedMovie } from '../../redux/actions/movieActions'
 
 
-function MovieDetail () {
-    const[movieDetailObj, setMovieDetailObj] = useState('');
-    var id = ImdbId();
+const MovieDetail = () => {
+    const movies = useSelector((state) => state);
+    const movieDetailObj = movies.movieData.selectedMovie;
+    const dispatch = useDispatch();
+    const { imdbID } = useParams()
     useEffect(()=> {
       getMovieDetailObj();   
   
-    },[])
+    },[imdbID])
     
-    const getMovieDetailObj= () => {
+    const getMovieDetailObj = () => {
       const movieApiurl = 'https://www.omdbapi.com';
       var params = new URLSearchParams();
       params.append("apikey", '18a01f17');
-      params.append("i",  id);
+      params.append("i",  imdbID);
   
       var request = { params: params };
   
       axios.get(movieApiurl , request)
       .then(resp => {
-         console.log("getMovieDetail response -> " + resp.data);
-         setMovieDetailObj(resp.data);
+        console.log("getMovieDetail response -> " + resp.data);
+        dispatch(setSelectedMovie(resp.data))
       })
       .catch(err => {
-            console.error("Error " + err);
+           console.error("Error " + err);
       })
     }     
 
@@ -52,12 +56,5 @@ function MovieDetail () {
                 </div>
             </div>
     </div> );
-}
-
-function ImdbId() {
-    
-    let { imdbID } = useParams();
-    return imdbID;
-}
-
+};
 export default MovieDetail;
