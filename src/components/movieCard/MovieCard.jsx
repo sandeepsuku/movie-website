@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import './movieCard.scss';
-//export class MovieCard extends Component { 
- // render() {
+
   const MovieCard =(props)=> {
     return (
      <div id=''>
