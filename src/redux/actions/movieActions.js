@@ -14,3 +14,12 @@ export const setSelectedMovie = (selectedMovie) => {
         
     }
 }
+
+export const setBoxOfficeMovies = (boxOfficeMovies) => {
+    return {
+        type: ActionTypes.SET_BOX_OFFICE_MOVIES,
+        payload: boxOfficeMovies,
+        
+    }
+}
+

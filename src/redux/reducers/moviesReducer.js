@@ -2,7 +2,9 @@ import { ActionTypes } from "../constants/actions-types"
 
 const initialState = {
     movies:[],
-    selectedMovie:{}
+    selectedMovie:{},
+    boxOfficeMovies:[]
+
 }
 export const movieReducer = (state = initialState, {type, payload}) => {
     switch(type) {
@@ -10,6 +12,8 @@ export const movieReducer = (state = initialState, {type, payload}) => {
             return state;
         case ActionTypes.SELECTED_MOVIE:
             return {...state, selectedMovie:payload};
+        case ActionTypes.SET_BOX_OFFICE_MOVIES:
+            return {...state, boxOfficeMovies:payload}    
         default:
             return state;
     }
