@@ -11,7 +11,7 @@ const MovieListing = (props) => {
                     <Grid container spacing={3} padding={2}>
                          {props.movies.map(function(movie, index) { 
                               var imageName, movieTypeValue, movieId;
-                              if (props.sectiontitle.includes('In Theaters') ) {
+                              if (!props.sectiontitle.includes('Recommended Movies') ) {
                                    imageName=movie.image;
                                    movieTypeValue=movie.genres;
                                    movieId=movie.id;
