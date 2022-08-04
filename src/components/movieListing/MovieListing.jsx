@@ -10,19 +10,36 @@ const MovieListing = (props) => {
                     <h2> {props.sectiontitle}</h2>
                     <Grid container spacing={3} padding={2}>
                          {props.movies.map(function(movie, index) { 
-                              var imageName, movieTypeValue, movieId;
-                              if (!props.sectiontitle.includes('Recommended Movies') ) {
-                                   imageName=movie.image;
-                                   movieTypeValue=movie.genres;
-                                   movieId=movie.id;
-                              } else {
-                                   imageName=movie.Poster;     
-                                   movieTypeValue=movie.Type;
-                                   movieId=movie.imdbID;
-                              } 
+                              var imageName, movieTypeValue, movieId, movieValue, movieYearValue;
+                              switch (props.sectiontitle) { 
+
+                                   case "Box Office":
+                                        imageName=movie.image;
+                                        movieTypeValue = movie.gross;
+                                        movieId=movie.id;
+                                        movieValue = movie.title;
+                                        movieYearValue = movie.rank; 
+                                        break;  
+
+                                   case "In Theaters":
+                                        imageName=movie.image;
+                                        movieTypeValue=movie.genres;
+                                        movieId=movie.id;
+                                        movieValue = movie.title;
+                                        movieYearValue = movie.year; 
+                                        break;  
+
+                                  default:
+                                        imageName=movie.Poster;     
+                                        movieTypeValue=movie.Type;
+                                        movieId=movie.imdbID;
+                                        movieValue = movie.Title; 
+                                        movieYearValue = movie.Year; 
+                                        break;
+                              }
                               return (
                               <Grid item lg={2} key={index}>
-                                   <MovieCard imageName={imageName} movieValue={movie.Title} movieYearValue={movie.Year} movieTypeValue={movieTypeValue}  movieId={movieId}></MovieCard>
+                                   <MovieCard imageName={imageName} movieValue={movieValue} movieYearValue={movieYearValue} movieTypeValue={movieTypeValue}  movieId={movieId}></MovieCard>
                               </Grid> )
                          })}
                     </Grid>
