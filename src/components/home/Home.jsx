@@ -10,17 +10,16 @@ import { setBoxOfficeMovies } from '../../redux/actions/movieActions';
 function Home() {
    const[movies, setMovies] = useState([]);
    const[originalmovielist, setOriginalmovies] = useState([]);
-   const [searchTerm, setSearchTerm] = useState('');
+   const[moviesInTheaters, setMoviesInTheaters] = useState([]);
+   const[searchTerm, setSearchTerm] = useState('');
    const moviesStore = useSelector((state) => state);
    const dispatch = useDispatch();
-
-   
 
     useEffect(()=> {
       getMovies();  
       getBoxOfficeMovies();  
+      getMoviesInTheaters();
     },[])
-
 
     const getMovies=() => {
       const movieApiurl = 'https://www.omdbapi.com';
@@ -33,7 +32,7 @@ function Home() {
   
       axios.get(movieApiurl , request)
       .then(resp => {
-         console.log("getAllMovies response list -> " + resp.data.Search);
+         console.log("getAllMovies count -> " + resp.data.Search.length);
          setMovies(resp.data.Search);
          setOriginalmovies(resp.data.Search);
       })
@@ -42,6 +41,19 @@ function Home() {
       })
     } 
 
+    const getMoviesInTheaters=() => {
+      //const movieApiurl = 'https://imdb-api.com/en/API/InTheaters/k_dzk5p0ra';
+      const movieApiurl = 'https://imdb-api.com/en/API/InTheaters/k_yqv296j2'
+
+      axios.get(movieApiurl)
+      .then(resp => {
+        console.log("getMoviesInTheaters count -> " + resp.data.items.length);
+        setMoviesInTheaters(resp.data.items);
+      })
+      .catch(err => {
+            console.error("Error " + err);
+      })
+    } 
 
     const getMoviesbysearchTerm=(searchTerm) => {
       let filterlist=movies.filter((value)=>{
@@ -49,7 +61,6 @@ function Home() {
       })
       setMovies(filterlist)
     }
-
 
     const getBoxOfficeMovies=() => {
       const url = 'https://imdb-api.com/en/API/BoxOffice/k_yqv296j2';
@@ -63,9 +74,6 @@ function Home() {
       })
     } 
 
-    
-    
-
   return (
     <div className='Movielist'>
       <div style={{ background : '#0f171e' }}>
@@ -78,9 +86,7 @@ function Home() {
           if (e.target.value.trim().length===0){
             console.log("movies",originalmovielist)
             setMovies(originalmovielist)
-            
-                    }
-          else {
+          } else {
             getMoviesbysearchTerm(e.target.value)
           }
           
@@ -92,9 +98,11 @@ function Home() {
           alt="search"
         />
         </div>
+
          <MovieListing movies={movies} sectiontitle={'Recommended Movies'} ></MovieListing>
          <MovieListing movies={moviesStore.movieData.boxOfficeMovies} sectiontitle={'Box Office'} ></MovieListing>
-         <MovieListing movies={movies} sectiontitle={'In Theaters'} ></MovieListing>
+         <MovieListing movies={moviesInTheaters} sectiontitle={'In Theaters'} ></MovieListing>
+
        </div>
     </div>
   )
