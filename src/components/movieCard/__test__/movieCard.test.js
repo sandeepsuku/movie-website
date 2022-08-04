@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import MovieCard from './MovieCard';
+import MovieCard from '../MovieCard';
 import '@testing-library/jest-dom/extend-expect';
 import { MemoryRouter } from 'react-router-dom';
 let movie = null
