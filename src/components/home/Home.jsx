@@ -99,7 +99,7 @@ function Home() {
         </div>
 
          <MovieListing movies={movies} sectiontitle={'Recommended Movies'} ></MovieListing>
-         <MovieListing movies={moviesStore.movieData.boxOfficeMovies} sectiontitle={'Box Office'} ></MovieListing>
+         <MovieListing movies={moviesStore.movieReducer.boxOfficeMovies} sectiontitle={'Box Office'} ></MovieListing>
          <MovieListing movies={moviesInTheaters} sectiontitle={'In Theaters'} ></MovieListing>
 
        </div>
