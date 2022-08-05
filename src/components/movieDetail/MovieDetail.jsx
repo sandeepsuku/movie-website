@@ -7,8 +7,8 @@ import { setSelectedMovie } from '../../redux/actions/movieActions'
 
 
 const MovieDetail = () => {
-    const movies = useSelector((state) => state);
-    const movieDetailObj = movies.movieData.selectedMovie;
+    const store = useSelector((state) => state);
+    const movieDetailObj = store.movieReducer.selectedMovie;
     const dispatch = useDispatch();
     const { imdbID } = useParams()
     useEffect(()=> {
