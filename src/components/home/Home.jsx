@@ -14,6 +14,8 @@ function Home() {
    const[searchTerm, setSearchTerm] = useState('');
    const moviesStore = useSelector((state) => state);
    const dispatch = useDispatch();
+   const key = 'k_dzk5p0ra';
+   //const key = 'k_yqv296j2';
 
     useEffect(()=> {
       getMovies();  
@@ -42,10 +44,9 @@ function Home() {
     } 
 
     const getMoviesInTheaters=() => {
-      //const movieApiurl = 'https://imdb-api.com/en/API/InTheaters/k_dzk5p0ra';
-      const movieApiurl = 'https://imdb-api.com/en/API/InTheaters/k_yqv296j2'
+      const url = "https://imdb-api.com/en/API/InTheaters/"+key;
 
-      axios.get(movieApiurl)
+      axios.get(url)
       .then(resp => {
         console.log("getMoviesInTheaters count -> " + resp.data.items.length);
         setMoviesInTheaters(resp.data.items);
@@ -63,7 +64,8 @@ function Home() {
     }
 
     const getBoxOfficeMovies=() => {
-      const url = 'https://imdb-api.com/en/API/BoxOffice/k_yqv296j2';
+      const url = "https://imdb-api.com/en/API/BoxOffice/" + key;
+
       axios.get(url)
       .then(resp => {
          console.log("Boxoffice Movies list -> " + resp.data.items);

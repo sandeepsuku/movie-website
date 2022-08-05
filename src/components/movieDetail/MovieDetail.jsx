@@ -35,7 +35,7 @@ const MovieDetail = () => {
     }     
 
     return (<div className="movie-info">
-            <div class="row">
+            <div className="row">
                 <div className="movie-info">
                     <img className="img" src={movieDetailObj.Poster} alt="" />
                         <div className="card-body">
