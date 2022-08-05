@@ -42,8 +42,7 @@ function Home() {
     } 
 
     const getMoviesInTheaters=() => {
-      //const movieApiurl = 'https://imdb-api.com/en/API/InTheaters/k_dzk5p0ra';
-      const movieApiurl = 'https://imdb-api.com/en/API/InTheaters/k_yqv296j2'
+      const movieApiurl = 'https://2acd621a-3eb5-453b-8d20-8006233bb610.mock.pstmn.io/InTheaters'
 
       axios.get(movieApiurl)
       .then(resp => {
@@ -63,7 +62,7 @@ function Home() {
     }
 
     const getBoxOfficeMovies=() => {
-      const url = 'https://imdb-api.com/en/API/BoxOffice/k_yqv296j2';
+      const url = 'https://2acd621a-3eb5-453b-8d20-8006233bb610.mock.pstmn.io/BoxOffice';
       axios.get(url)
       .then(resp => {
          console.log("Boxoffice Movies list -> " + resp.data.items);
