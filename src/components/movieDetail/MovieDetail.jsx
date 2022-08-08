@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedMovie } from '../../redux/actions/movieActions'
+import Rating from '../rating/rating';
 
 
 const MovieDetail = () => {
@@ -54,6 +55,10 @@ const MovieDetail = () => {
                         <h3 className="movie-info">Plot : {movieDetailObj.Plot}</h3>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+              <Rating title='IMDB' percent='.7'/>
+              <Rating title='Metric' percent='.9'/>
             </div>
     </div> );
 };
