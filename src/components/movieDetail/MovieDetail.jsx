@@ -3,19 +3,23 @@ import './movieDetail.scss';
 import {useParams} from "react-router-dom";
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedMovie } from '../../redux/actions/movieActions'
+// import { setSelectedMovie } from '../../redux/actions/movieActions'
+import { setMovieTrailer, setSelectedMovie } from '../../redux/actions/movieActions'
+import MovieTrailer from '../movieTrailer/MovieTrailer';
 import Rating from '../rating/rating';
 
 
 const MovieDetail = () => {
     const store = useSelector((state) => state);
     const movieDetailObj = store.movieReducer.selectedMovie;
+    const movieTrailer = store.movieReducer.movieTrailer;
     const ratings = store.movieReducer.selectedMovie.Ratings;
 
     const dispatch = useDispatch();
     const { imdbID } = useParams()
     useEffect(()=> {
       getMovieDetailObj();   
+      getMovieTrailerObj(); 
   
     },[imdbID])
     
@@ -35,7 +39,21 @@ const MovieDetail = () => {
       .catch(err => {
            console.error("Error " + err);
       })
-    }     
+    }   
+    
+    
+    const getMovieTrailerObj = () => {
+
+      const movieApiurl = `https://imdb-api.com/en/API/Trailer/k_q930tuy4/${imdbID}`;
+      axios.get(movieApiurl)
+      .then(resp => {
+        console.log("getMovie Trailer response -> " + resp.data.videoTitle);
+        dispatch(setMovieTrailer(resp.data))
+    })
+      .catch(err => {
+           console.error("Error " + err);
+      })
+    } 
     if(movieDetailObj != undefined && movieDetailObj.Ratings != undefined) {
     return (<div className="movie-info">
             <div class="row">
@@ -55,6 +73,8 @@ const MovieDetail = () => {
                         <h3 className="movie-info">Year : {movieDetailObj.Year}</h3>
                         <h3 className="movie-info">Actors : {movieDetailObj.Actors}</h3>
                         <h3 className="movie-info">Plot : {movieDetailObj.Plot}</h3>
+
+                        <MovieTrailer embeddedLink={movieTrailer.linkEmbed}/>
                     </div>
                 </div>
             </div>
