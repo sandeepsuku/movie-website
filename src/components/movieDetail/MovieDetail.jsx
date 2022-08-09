@@ -10,6 +10,8 @@ import Rating from '../rating/rating';
 const MovieDetail = () => {
     const store = useSelector((state) => state);
     const movieDetailObj = store.movieReducer.selectedMovie;
+    const ratings = store.movieReducer.selectedMovie.Ratings;
+
     const dispatch = useDispatch();
     const { imdbID } = useParams()
     useEffect(()=> {
@@ -34,7 +36,7 @@ const MovieDetail = () => {
            console.error("Error " + err);
       })
     }     
-
+    if(movieDetailObj != undefined && movieDetailObj.Ratings != undefined) {
     return (<div className="movie-info">
             <div class="row">
                 <div className="movie-info">
@@ -57,9 +59,10 @@ const MovieDetail = () => {
                 </div>
             </div>
             <div class="row">
-              <Rating title='IMDB' percent='.7'/>
-              <Rating title='Metric' percent='.9'/>
+              {movieDetailObj.Ratings.map(({ Source, Value}) => (
+                <Rating title={Source} percent={(Math.floor(Math.random()*(100-1+1))+1)/100}/>
+              ))} 
             </div>
     </div> );
-};
+};}
 export default MovieDetail;
