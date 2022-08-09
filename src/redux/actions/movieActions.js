@@ -23,3 +23,11 @@ export const setBoxOfficeMovies = (boxOfficeMovies) => {
     }
 }
 
+export const setMovieTrailer = (movieTrailer) => {
+    return {
+        type: ActionTypes.SET_MOVIE_TRAILER,
+        payload: movieTrailer,
+        
+    }
+}
+
