@@ -56,7 +56,7 @@ const MovieDetail = () => {
     } 
     if(movieDetailObj != undefined && movieDetailObj.Ratings != undefined) {
     return (<div className="movie-info">
-            <div class="row">
+            <div className="row">
                 <div className="movie-info">
                     <img className="img" src={movieDetailObj.Poster} alt="" />
                         <div className="card-body">
@@ -73,12 +73,13 @@ const MovieDetail = () => {
                         <h3 className="movie-info">Year : {movieDetailObj.Year}</h3>
                         <h3 className="movie-info">Actors : {movieDetailObj.Actors}</h3>
                         <h3 className="movie-info">Plot : {movieDetailObj.Plot}</h3>
-
-                        <MovieTrailer embeddedLink={movieTrailer.linkEmbed}/>
                     </div>
                 </div>
+                <div>
+                <MovieTrailer embeddedLink={movieTrailer.linkEmbed}/>
+                </div>
             </div>
-            <div class="row">
+            <div className="row">
               {movieDetailObj.Ratings.map(({ Source, Value}) => (
                 <Rating title={Source} percent={(Math.floor(Math.random()*(100-1+1))+1)/100}/>
               ))} 
