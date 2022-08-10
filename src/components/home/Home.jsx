@@ -4,7 +4,7 @@ import MovieListing from '../movieListing/MovieListing'
 import SerchIcon from './search.svg';
 import './home.scss'
 import { useSelector, useDispatch } from 'react-redux';
-import { setBoxOfficeMovies } from '../../redux/actions/movieActions';
+import { setBoxOfficeMovies } from '../../redux/movieSlice';
 
 
 function Home() {

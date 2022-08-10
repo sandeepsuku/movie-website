@@ -3,8 +3,7 @@ import './movieDetail.scss';
 import {useParams} from "react-router-dom";
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-// import { setSelectedMovie } from '../../redux/actions/movieActions'
-import { setMovieTrailer, setSelectedMovie } from '../../redux/actions/movieActions'
+import { setMovieTrailer, setSelectedMovie } from '../../redux/movieSlice'
 import MovieTrailer from '../movieTrailer/MovieTrailer';
 import Rating from '../rating/rating';
 
@@ -13,7 +12,6 @@ const MovieDetail = () => {
     const store = useSelector((state) => state);
     const movieDetailObj = store.movieReducer.selectedMovie;
     const movieTrailer = store.movieReducer.movieTrailer;
-    const ratings = store.movieReducer.selectedMovie.Ratings;
 
     const dispatch = useDispatch();
     const { imdbID } = useParams()
