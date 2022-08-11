@@ -10,7 +10,7 @@ const MovieListing = (props) => {
                     <h2> {props.sectiontitle}</h2>
                     <Grid container spacing={3} padding={2}>
                          {props.movies.map(function(movie, index) { 
-                              var imageName, movieTypeValue, movieId, movieValue, movieYearValue;
+                              var imageName, movieTypeValue, movieId, movieValue, movieYearValue, movieRating;
                               switch (props.sectiontitle) { 
 
                                    case "Box Office":
@@ -27,6 +27,7 @@ const MovieListing = (props) => {
                                         movieId=movie.id;
                                         movieValue = movie.title;
                                         movieYearValue = movie.year; 
+                                        movieRating = movie.imDbRating/2;
                                         break;  
 
                                   default:
@@ -39,7 +40,9 @@ const MovieListing = (props) => {
                               }
                               return (
                               <Grid item lg={2} key={index}>
-                                   <MovieCard imageName={imageName} movieValue={movieValue} movieYearValue={movieYearValue} movieTypeValue={movieTypeValue}  movieId={movieId}></MovieCard>
+                                   <MovieCard imageName={imageName} movieValue={movieValue} movieYearValue={movieYearValue} 
+                                   movieTypeValue={movieTypeValue}  movieId={movieId} movieRatingValue={movieRating}
+                                   showTrailer={props.showTrailer} ></MovieCard>
                               </Grid> )
                          })}
                     </Grid>
