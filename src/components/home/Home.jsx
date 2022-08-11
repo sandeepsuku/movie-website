@@ -63,14 +63,16 @@ function Home() {
 
     const getBoxOfficeMovies=() => {
       const url = 'https://2acd621a-3eb5-453b-8d20-8006233bb610.mock.pstmn.io/BoxOffice';
-      axios.get(url)
-      .then(resp => {
-         console.log("Boxoffice Movies list -> " + resp.data.items);
-         dispatch(setBoxOfficeMovies(resp.data.items))
-      })
-      .catch(err => {
-            console.error("Error " + err);
-      })
+      if (moviesStore.movieReducer.boxOfficeMovies.length === 0) {
+          axios.get(url)
+          .then(resp => {
+            console.log("Boxoffice Movies list -> " + resp.data.items);
+            dispatch(setBoxOfficeMovies(resp.data.items))
+          })
+          .catch(err => {
+                console.error("Error " + err);
+          })
+      }
     } 
 
   return (
