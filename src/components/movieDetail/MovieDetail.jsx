@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setMovieTrailer, setSelectedMovie } from '../../redux/movieSlice'
 import MovieTrailer from '../movieTrailer/MovieTrailer';
 import Rating from '../rating/rating';
-
+import {Link} from "react-router-dom";
 
 const MovieDetail = () => {
     const store = useSelector((state) => state);
@@ -52,8 +52,11 @@ const MovieDetail = () => {
            console.error("Error " + err);
       })
     } 
-    if(movieDetailObj != undefined && movieDetailObj.Ratings != undefined) {
+    if(movieDetailObj !== undefined && movieDetailObj.Ratings !==undefined) {
     return (<div className="movie-info">
+            <div className="row-link">
+              <Link to='/movie-website/'>Go to Home Page</Link>
+            </div>
             <div className="row">
                 <div className="movie-info">
                     <img className="img" src={movieDetailObj.Poster} alt="" />
