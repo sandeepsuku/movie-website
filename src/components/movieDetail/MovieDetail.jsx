@@ -22,14 +22,13 @@ const MovieDetail = () => {
     },[imdbID])
     
     const getMovieDetailObj = () => {
-      const movieApiurl = 'https://www.omdbapi.com';
       var params = new URLSearchParams();
       params.append("apikey", '18a01f17');
       params.append("i",  imdbID);
   
       var request = { params: params };
   
-      axios.get(movieApiurl , request)
+      axios.get(process.env.REACT_APP_OMDAPI_URL , request)
       .then(resp => {
         console.log("getMovieDetail response -> " + resp.data);
         dispatch(setSelectedMovie(resp.data))
@@ -41,9 +40,7 @@ const MovieDetail = () => {
     
     
     const getMovieTrailerObj = () => {
-
-      const movieApiurl = `https://imdb-api.com/en/API/Trailer/k_q930tuy4/${imdbID}`;
-      axios.get(movieApiurl)
+      axios.get(process.env.REACT_APP_TRAILER_URL + imdbID)
       .then(resp => {
         console.log("getMovie Trailer response -> " + resp.data.videoTitle);
         dispatch(setMovieTrailer(resp.data))

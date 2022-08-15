@@ -24,7 +24,6 @@ function Home() {
   }, []);
 
   const getMovies = () => {
-    const movieApiurl = "https://www.omdbapi.com";
     var params = new URLSearchParams();
     params.append("apikey", "18a01f17");
     params.append("s", "batman");
@@ -33,7 +32,7 @@ function Home() {
     var request = { params: params };
 
     axios
-      .get(movieApiurl, request)
+      .get(process.env.REACT_APP_OMDAPI_URL, request)
       .then((resp) => {
         console.log("getAllMovies count -> " + resp.data.Search.length);
         setMovies(resp.data.Search);
@@ -45,11 +44,8 @@ function Home() {
   };
 
   const getMoviesInTheaters = () => {
-    const movieApiurl =
-      "https://2acd621a-3eb5-453b-8d20-8006233bb610.mock.pstmn.io/InTheaters";
-
     axios
-      .get(movieApiurl)
+      .get(process.env.REACT_APP_INTHEATERS_URL)
       .then((resp) => {
         console.log("getMoviesInTheaters count -> " + resp.data.items.length);
         setMoviesInTheaters(resp.data.items);
@@ -67,11 +63,9 @@ function Home() {
   };
 
   const getBoxOfficeMovies = () => {
-    const url =
-      "https://2acd621a-3eb5-453b-8d20-8006233bb610.mock.pstmn.io/BoxOffice";
     if (moviesStore.movieReducer.boxOfficeMovies.length === 0) {
       axios
-        .get(url)
+        .get(process.env.REACT_APP_BOXOFFICE_URL)
         .then((resp) => {
           console.log("Boxoffice Movies list -> " + resp.data.items);
           dispatch(setBoxOfficeMovies(resp.data.items));
@@ -83,9 +77,7 @@ function Home() {
   };
 
   const getMovieTrailerObj = (imdbID) => {
-
-    const movieApiurl = `https://imdb-api.com/en/API/Trailer/k_q930tuy4/${imdbID}`;
-    axios.get(movieApiurl)
+    axios.get(process.env.REACT_APP_TRAILER_URL + imdbID)
     .then(resp => {
       console.log("getMovie Trailer response -> " + resp.data.videoTitle);
       setMovieId(resp.data.linkEmbed);
