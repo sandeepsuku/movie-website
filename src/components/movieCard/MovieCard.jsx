@@ -17,7 +17,7 @@ import RatingIcon from '@mui/material/Rating'
             </div>
             <div>
                <span>{props.movieTypeValue}  <RatingIcon defaultValue={props.movieRatingValue} readOnly/></span>
-               <h3>Title: {props.movieValue} <PlayArrowIcon onClick={event => props.showTrailer(props.movieId)} fontSize="small"/></h3>
+               <h3>Title: {props.movieValue} <PlayArrowIcon onClick={event => props.showTrailer(props.movieId)} fontSize="small" style={{ color: "white" }} /></h3>
                <span></span>
             </div>
            </div> 
