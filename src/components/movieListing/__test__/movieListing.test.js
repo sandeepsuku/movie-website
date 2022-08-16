@@ -3,7 +3,6 @@ import MovieListing from '../movieListing';
 import '@testing-library/jest-dom/extend-expect';
 
 function showTrailerModel () {
-  console.log("here")
 }
 
 let movie = null
