@@ -19,7 +19,7 @@ const MovieDetail = () => {
     const dispatch = useDispatch();
     const { imdbID } = useParams()
     useEffect(()=> {
-      getMovieDetailObj();   
+      getMovieDetailObj();  
       getMovieTrailerObj(); 
       getUserRating();
     },[imdbID])
@@ -67,18 +67,28 @@ const MovieDetail = () => {
       })
     }
     else{
-      dispatch(setSelectedMovie(seletedTrailerObject))
+      dispatch(setMovieTrailer(seletedTrailerObject))
     }
     }
     
     const getUserRating = () => {
+     let seletedRatingObject = LocalCacheHandler.getMovieRatingById(imdbID);
+     console.log("Selected Rating Object",seletedRatingObject)
+      if(seletedRatingObject===undefined)
+      {
       axios.get(process.env.REACT_APP_USERRATING_URL + imdbID)
       .then(resp => {
+        console.log("getMovie Rating response -> " + resp.data);
+        LocalCacheHandler.addMovieRating(resp.data)
         dispatch(setUserRatings(resp.data.items))
     })
       .catch(err => {
            console.error("Error " + err);
       })
+    }
+    else{
+      dispatch(setUserRatings(seletedRatingObject.items))
+    }
     }
     
     if(movieDetailObj && movieDetailObj.Ratings && userReviews) {

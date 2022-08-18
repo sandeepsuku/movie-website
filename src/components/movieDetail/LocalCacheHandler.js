@@ -2,6 +2,7 @@ export class LocalCacheHandler{
 
     static moviesDetails = new Map()
     static moviesTrailers = new Map() 
+	static movieRatings = new Map()
     static addMovie(movie) {
        this.moviesDetails.set(movie.imdbID,movie);
     }
@@ -25,4 +26,16 @@ export class LocalCacheHandler{
     {
         this.moviesTrailers.clear()
     }
-   }
+	static addMovieRating(rating) {
+      
+       this.movieRatings.set(rating.imDbId,rating);
+    }
+    static getMovieRatingById(id)
+    {
+       return this.movieRatings.get(id);
+    }
+    static clear()
+    {
+        this.movieRatings.clear()
+    }
+}
