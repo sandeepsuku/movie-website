@@ -3,22 +3,24 @@ import './movieDetail.scss';
 import {useParams} from "react-router-dom";
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMovieTrailer, setSelectedMovie } from '../../redux/movieSlice'
+import { setMovieTrailer, setSelectedMovie, setUserRatings } from '../../redux/movieSlice'
 import MovieTrailer from '../movieTrailer/MovieTrailer';
 import Rating from '../rating/rating';
 import {Link} from "react-router-dom";
+import UserRating from '../userRating/UserRating';
+import { Grid } from '@mui/material'
 
 const MovieDetail = () => {
     const store = useSelector((state) => state);
     const movieDetailObj = store.movieReducer.selectedMovie;
     const movieTrailer = store.movieReducer.movieTrailer;
-
+    const userReviews = store.movieReducer.userRatings;
     const dispatch = useDispatch();
     const { imdbID } = useParams()
     useEffect(()=> {
       getMovieDetailObj();   
       getMovieTrailerObj(); 
-  
+      getUserRating();
     },[imdbID])
     
     const getMovieDetailObj = () => {
@@ -30,7 +32,6 @@ const MovieDetail = () => {
   
       axios.get(process.env.REACT_APP_OMDAPI_URL , request)
       .then(resp => {
-        console.log("getMovieDetail response -> " + resp.data);
         dispatch(setSelectedMovie(resp.data))
       })
       .catch(err => {
@@ -42,14 +43,24 @@ const MovieDetail = () => {
     const getMovieTrailerObj = () => {
       axios.get(process.env.REACT_APP_TRAILER_URL + imdbID)
       .then(resp => {
-        console.log("getMovie Trailer response -> " + resp.data.videoTitle);
         dispatch(setMovieTrailer(resp.data))
     })
       .catch(err => {
            console.error("Error " + err);
       })
-    } 
-    if(movieDetailObj !== undefined && movieDetailObj.Ratings !==undefined) {
+    }
+    
+    const getUserRating = () => {
+      axios.get(process.env.REACT_APP_USERRATING_URL + imdbID)
+      .then(resp => {
+        dispatch(setUserRatings(resp.data.items))
+    })
+      .catch(err => {
+           console.error("Error " + err);
+      })
+    }
+    
+    if(movieDetailObj && movieDetailObj.Ratings && userReviews) {
     return (<div className="movie-info">
             <div className="row-link">
               <Link to='/movie-website/'>Go to Home Page</Link>
@@ -82,6 +93,7 @@ const MovieDetail = () => {
                 <Rating title={Source} percent={(Math.floor(Math.random()*(100-1+1))+1)/100}/>
               ))} 
             </div>
+            {userReviews.map((rating, index) => (<Grid item lg={6} sx={{ padding :2}}  key={index}> <UserRating key={index} rating={rating}/> </Grid> ))}
     </div> );
 };}
 export default MovieDetail;

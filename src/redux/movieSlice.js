@@ -4,7 +4,8 @@ const initialState = {
     movies: [],
     selectedMovie: {},
     boxOfficeMovies:[],
-    movieTrailer:{}
+    movieTrailer:{},
+    userRatings:[]
 }
 
 const movieSlice = createSlice({
@@ -19,6 +20,9 @@ const movieSlice = createSlice({
         },
         setMovieTrailer:(state, {payload}) => {
             state.movieTrailer = payload;
+        },
+        setUserRatings:(state, {payload}) => {
+            state.userRatings = payload;
         }
  
     },
@@ -30,5 +34,7 @@ export const { setMovieTrailer } = movieSlice.actions;
 export const getMovieTrailer = (state) => state.movieTrailer;
 export const { setBoxOfficeMovies } = movieSlice.actions;
 export const getBoxOfficeMovies = (state) => state.boxOfficeMovies;
+export const { setUserRatings } = movieSlice.actions;
+export const getUserRatings = (state) => state.userRatings;
 
 export default movieSlice.reducer;
