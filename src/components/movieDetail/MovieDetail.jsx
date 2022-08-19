@@ -8,7 +8,8 @@ import MovieTrailer from '../movieTrailer/MovieTrailer';
 import Rating from '../rating/rating';
 import {Link} from "react-router-dom";
 import UserRating from '../userRating/UserRating';
-import { Grid } from '@mui/material'
+import { Grid } from '@mui/material';
+import {LocalCacheHandler} from '../movieDetail/LocalCacheHandler'
 
 const MovieDetail = () => {
     const store = useSelector((state) => state);
@@ -18,12 +19,16 @@ const MovieDetail = () => {
     const dispatch = useDispatch();
     const { imdbID } = useParams()
     useEffect(()=> {
-      getMovieDetailObj();   
+      getMovieDetailObj();  
       getMovieTrailerObj(); 
       getUserRating();
     },[imdbID])
     
     const getMovieDetailObj = () => {
+    let seletedObject = LocalCacheHandler.getMovieById(imdbID);
+     console.log("Selected Object",seletedObject)
+      if(seletedObject===undefined)
+      {
       var params = new URLSearchParams();
       params.append("apikey", '18a01f17');
       params.append("i",  imdbID);
@@ -32,32 +37,58 @@ const MovieDetail = () => {
   
       axios.get(process.env.REACT_APP_OMDAPI_URL , request)
       .then(resp => {
+        console.log("getMovieDetail response -> " + resp.data);
+        LocalCacheHandler.addMovie(resp.data)
         dispatch(setSelectedMovie(resp.data))
       })
       .catch(err => {
            console.error("Error " + err);
       })
+    }
+    else{
+      dispatch(setSelectedMovie(seletedObject))
+    }
     }   
     
     
     const getMovieTrailerObj = () => {
+    let seletedTrailerObject = LocalCacheHandler.getMovieTrailerById(imdbID);
+     console.log("Selected  Trailer Object",seletedTrailerObject)
+      if(seletedTrailerObject===undefined)
+      {
       axios.get(process.env.REACT_APP_TRAILER_URL + imdbID)
       .then(resp => {
+        console.log("getMovieTrailer response -> " + resp.data);
+        LocalCacheHandler.addMovieTrailor(resp.data)
         dispatch(setMovieTrailer(resp.data))
     })
       .catch(err => {
            console.error("Error " + err);
       })
     }
+    else{
+      dispatch(setMovieTrailer(seletedTrailerObject))
+    }
+    }
     
     const getUserRating = () => {
+     let seletedRatingObject = LocalCacheHandler.getMovieRatingById(imdbID);
+     console.log("Selected Rating Object",seletedRatingObject)
+      if(seletedRatingObject===undefined)
+      {
       axios.get(process.env.REACT_APP_USERRATING_URL + imdbID)
       .then(resp => {
+        console.log("getMovie Rating response -> " + resp.data);
+        LocalCacheHandler.addMovieRating(resp.data)
         dispatch(setUserRatings(resp.data.items))
     })
       .catch(err => {
            console.error("Error " + err);
       })
+    }
+    else{
+      dispatch(setUserRatings(seletedRatingObject.items))
+    }
     }
     
     if(movieDetailObj && movieDetailObj.Ratings && userReviews) {
