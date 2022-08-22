@@ -32,7 +32,7 @@ function Home() {
     var request = { params: params };
 
     axios
-      .get(process.env.REACT_APP_OMDAPI_URL, request)
+      .get(process.env.REACT_APP_RECOMMENDED_URL, request)
       .then((resp) => {
         console.log("getAllMovies count -> " + resp.data.Search.length);
         setMovies(resp.data.Search);
